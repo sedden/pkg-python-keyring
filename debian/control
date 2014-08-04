@@ -1,0 +1,55 @@
+Source: python-keyring
+Priority: optional
+Section: python
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.2
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Uploaders: Carl Chenet <chaica@debian.org>, Dmitry Shachnev <mitya57@gmail.com>
+Build-Depends:
+ debhelper (>= 9),
+ dh-python,
+ python-all (>= 2.6.6-13),
+ python-crypto,
+ python-fs,
+ python-mock,
+ python-pytest,
+ python-setuptools,
+ python3-all,
+ python3-crypto,
+ python3-mock,
+ python3-pytest,
+ python3-setuptools,
+ unzip
+Standards-Version: 3.9.5
+Homepage: https://bitbucket.org/kang/python-keyring-lib
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/python-keyring/trunk/
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/python-keyring/trunk/
+
+Package: python-keyring
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Recommends: python-crypto, python-secretstorage
+Suggests:
+ gir1.2-gnomekeyring-1.0,
+ python-fs,
+ python-gdata,
+ python-gi,
+ python-kde4,
+ python-keyczar
+Breaks: kupfer (<< 0+v208-2.1), python-mini-buildd (<< 1.0.0~gamma.3)
+Description: store and access your passwords safely
+ The Python keyring library provides an easy way to access the system
+ keyring service (e.g Gnome-Keyring, KWallet) from Python.
+ it can be used in any application that needs safe password storage.
+
+Package: python3-keyring
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}
+Recommends: python3-crypto, python3-secretstorage
+Suggests: gir1.2-gnomekeyring-1.0, python3-gi, python3-pykde4
+Description: store and access your passwords safely - Python 3 version of the package
+ The Python keyring library provides an easy way to access the system
+ keyring service (e.g Gnome-Keyring, KWallet) from Python.
+ it can be used in any application that needs safe password storage.
+ .
+ This is the Python 3 version of the package.

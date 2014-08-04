@@ -1,0 +1,12 @@
+python-keyring (1.4-1) unstable; urgency=low
+
+  This version no longer supports the conversion of pre-0.9 Crypto-based
+  keyring files. The version in wheezy (0.7.1-1+deb7u1) automatically converts
+  these files when you use it, so if you were using python-keyring in wheezy,
+  you are not affected.
+
+  Otherwise, if you used the Crypto backend, you should convert these files
+  manually using /usr/share/python-keyring/convert-crypto-keyring script from
+  the python-keyring package.
+
+ -- Dmitry Shachnev <mitya57@gmail.com>  Sat, 22 Jun 2013 11:03:11 +0400

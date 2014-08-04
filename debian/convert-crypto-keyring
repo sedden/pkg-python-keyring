@@ -1,0 +1,64 @@
+#!/usr/bin/python
+
+# This script is based on code in python-keyring < 1.0
+# Original authors: Jason R. Coombs, Kang Zhang, Sebastian Ramacher
+# Adopted to use as a stand-alone script by Dmitry Shachnev
+
+"""
+Convert keyring from the 0.9.0 and earlier format to the current
+format.
+"""
+
+import getpass
+import crypt
+import sys
+
+try:
+    from configparser import RawConfigParser
+except ImportError:
+    from ConfigParser import RawConfigParser
+
+from Crypto.Cipher import AES
+from keyring.backends.file import EncryptedKeyring
+from keyring.util.escape import unescape
+
+KEYRING_SETTING = 'keyring-setting'
+CRYPTED_PASSWORD = 'crypted-password'
+
+if len(sys.argv) > 1:
+    file_path = sys.argv[1]
+else:
+    sys.exit('Usage: %s [file name]' % sys.argv[0])
+
+config = RawConfigParser()
+config.read(file_path)
+config.get(KEYRING_SETTING, CRYPTED_PASSWORD)
+
+keyring = EncryptedKeyring()
+keyring.file_path = file_path
+keyring_password = getpass.getpass(
+    "Please enter your password for the old keyring: ")
+
+hashed = crypt.crypt(keyring_password, keyring_password)
+if config.get(KEYRING_SETTING, CRYPTED_PASSWORD) != hashed:
+    sys.stderr.write("Wrong password for the keyring.\n")
+    raise ValueError("Wrong password")
+
+config.remove_option(KEYRING_SETTING, CRYPTED_PASSWORD)
+with open(file_path, 'w') as f:
+    config.write(f)
+
+password = keyring_password + (
+    keyring.block_size - len(keyring_password) % keyring.block_size
+    ) * keyring.pad_char
+
+for service in config.sections():
+    for user in config.options(service):
+        cipher = AES.new(password, AES.MODE_CFB, '\0' * AES.block_size)
+        password_c = config.get(service, user).decode('base64')
+        service = unescape(service)
+        user = unescape(user)
+        password_p = cipher.decrypt(password_c)
+        keyring.set_password(service, user, password_p)
+
+print("File upgraded successfully")

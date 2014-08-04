@@ -1,0 +1,2 @@
+debian/convert-crypto-keyring usr/share/python-keyring/
+usr/lib/python2*
