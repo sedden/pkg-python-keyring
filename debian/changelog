@@ -1,3 +1,11 @@
+python-keyring (4.0-1sedden1) unstable; urgency=medium
+
+  * Build and test packaging on Travis CI.
+  * Packages are getting uploaded AWS S3.
+  * Package python3-keyring provides usr/bin/keyring.
+
+ -- Stefan Jenkner <stefan@jenkner.org>  Sun, 28 Feb 2016 02:27:16 +0100
+
 python-keyring (4.0-1) unstable; urgency=medium
 
   * New upstream release.
