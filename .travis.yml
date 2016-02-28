@@ -4,8 +4,20 @@ services:
  - docker
 
 script:
- - wget -O- https://raw.githubusercontent.com/sedden/travis.debian.net/security-updates/script.sh | sh -
+ - wget -O- http://travis.debian.net/script.sh | sh -
 
 branches:
   except:
    - /^debian\/\d/
+
+deploy:
+  provider: s3
+  access_key_id: AKIAIAHUJWCLRKNOYIWQ
+  secret_access_key:
+    secure: Iw4ejzLSnZU8q5/dHeiHKAQOJgH5BkZcASj/ThV2cPTKZkzhCw/SDcTVgJtP8IqxPCSSGJXN2YuikKOVV+pAemii+lm0YVV6vi/F03yHbgprxNkY+OrxnxZAyOQjZG8VUuOtfoTgipddgidGIA/ok2E5QFn3c9vVoNg312vLkwTCjtfvMAOrxIfJIdH33tXu9vzoJZsajwCOcH04oXmafd6fG8kGXtJjTrhMxgJ3rN3iQBZdwpZCxhMByKLA06vRP0m7mDTIuJu2APq1zWZUMtzwuqS+zFcX9VQ0uPrVtGkFYKJOSDmR6uNkhWYgojRRBU2NCNV42mIocq4wL7PUzGt8Xq8pHyt1fCbCSWBGDzImkPgHR7nWwThOIA144Awh8X99zTyL6OkcaduIumZ/sCmsgcpdfa+5OjpTeZ1GvmGpyX/D/riAxDVIEdonFmR1njaQ1itZIZGcTlKpXe+6gKAURVkaaNxA4xzrPoSp7ZJ8CG4c5ffJ67wWBWdabhnVSIYJYkZ1Y0+h/OoNSh2ULxKhi1Luc3+UGkD15ogI+Tvb08WYyQEGibDYvtg930PFILy8vSYMHzxkxCWzEZdGy7y0k0bIKl0QIQK6VqBEozK2OC7UJ6SVfbn+PbJHpaRRS+f7D+PI1mN8Fgcbz9wCpSNpCcNSc2EAPTe6iQqjj3w=
+  bucket: s3.jenkner.org
+  region: eu-west-1
+  upload-dir: debian
+  on:
+    repo: sedden/pkg-python-keyring
+    branch: debian/jessie
