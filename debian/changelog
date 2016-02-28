@@ -1,3 +1,9 @@
+python-keyring (4.0-1sedden2) UNRELEASED; urgency=medium
+
+  * Package python3-keyring depends on python3-pkg-resources.
+
+ -- Stefan Jenkner <stefan@jenkner.org>  Sun, 28 Feb 2016 03:02:04 +0100
+
 python-keyring (4.0-1sedden1) unstable; urgency=medium
 
   * Build and test packaging on Travis CI.
