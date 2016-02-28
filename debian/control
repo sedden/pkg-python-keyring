@@ -44,7 +44,7 @@ Description: store and access your passwords safely
 
 Package: python3-keyring
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}, ${python3:Depends}, python3-pkg-resources
 Recommends: python3-crypto, python3-secretstorage
 Suggests: gir1.2-gnomekeyring-1.0, python3-gi, python3-pykde4
 Description: store and access your passwords safely - Python 3 version of the package
