@@ -1,4 +1,10 @@
-python-keyring (4.0-1sedden2) UNRELEASED; urgency=medium
+python-keyring (4.0-1sedden3) unstable; urgency=medium
+
+  * Deploy to GitHub.
+
+ -- Stefan Jenkner <stefan@jenkner.org>  Sun, 03 Apr 2016 16:51:17 +0100
+
+python-keyring (4.0-1sedden2) unstable; urgency=medium
 
   * Package python3-keyring depends on python3-pkg-resources.
 
